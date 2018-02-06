@@ -1,0 +1,28 @@
+#!/usr/bin/perl
+use ExchangeApiLookup;
+use Data::Dumper;
+use Role::Tiny;
+use Exchanges;
+use JSON::Parse qw/ json_file_to_perl /;
+
+my $lookup = ExchangeApiLookup->new();
+my $role = Exchanges(json_file_to_perl('/home/agmr/git/cryptoexchangereport/lib/ExchangeApiLookup/lib/exchanges.json'));
+Role::Tiny->apply_roles_to_object($lookup, ($role));
+
+#$role->greeting();
+#my $response = $lookup->send_request();
+#print Dumper($response->content);
+
+while (<>) {
+    chomp;
+
+    my $command = join '_', split ' ';
+    
+    if ($lookup->can($command)) {
+        $lookup->$command();
+    } else {
+        $lookup->commands;
+    }
+
+    print "\n";
+}

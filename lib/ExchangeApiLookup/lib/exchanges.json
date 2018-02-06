@@ -1,0 +1,177 @@
+{
+    "binance": {
+        "name": "binance",
+        "url": "https://www.binance.com/",
+        "api_documentation": "https://github.com/binance-exchange/binance-official-api-docs",
+        "api_endpoints": {
+            "order_book": "https://www.binance.com/api/v1/depth?symbol=%s",
+            "market": "/api/v3/ticker/bookTicker?symbol=%s",
+            "last_trades": "https://www.binance.com/api/v1/trades?symbol=%s"
+        }
+    },
+
+    "bit_z": {
+        "name": "bit_z",
+        "url": "https://www.bit-z.com/",
+        "api_documentation": "https://www.bit-z.com/api.html",
+        "api_endpoints": {
+            "order_book": "",
+            "market": "",
+            "last_trades": ""
+        }
+    },
+
+    "bitfinex": {
+        "name": "bitfinex",
+        "url": "https://www.bitfinex.com/",
+        "api_documentation": "https://docs.bitfinex.com/docs",
+        "api_endpoints": {
+            "order_book": "",
+            "market": "",
+            "last_trades": ""
+        }
+    },
+
+    "bithumb": {
+        "name": "bithumb",
+        "url": "https://www.bithumb.com/",
+        "api_documentation": "https://www.bithumb.com/u1/US127",
+        "api_endpoints": {
+            "order_book": "",
+            "market": "",
+            "last_trades": ""
+        }
+    },
+
+    "bitstamp": {
+        "name": "bitstamp",
+        "url": "https://www.bitstamp.net/",
+        "api_documentation": "https://www.bitstamp.net/api/",
+        "api_endpoints": {
+            "order_book": "",
+            "market": "",
+            "last_trades": ""
+        }
+    },
+
+    "bittrex": {
+        "name": "bittrex",
+        "url": "https://bittrex.com/",
+        "api_documentation": "https://bittrex.com/home/api",
+        "api_endpoints": {
+            "order_book": "https://bittrex.com/api/v1.1/public/getorderbook?market=%s&type=both",
+            "market": "https://bittrex.com/api/v1.1/public/getticker?market=%s",
+            "last_trades": "https://bittrex.com/api/v1.1/public/getmarkethistory?market=%s"
+        }
+    },
+
+    "coinone": {
+        "name": "coinone",
+        "url": "https://coinone.co.kr/",
+        "api_documentation": "http://doc.coinone.co.kr/",
+        "api_endpoints": {
+            "order_book": "",
+            "market": "",
+            "last_trades": ""
+        }
+    },
+
+    "gdax": {
+        "name": "gdax",
+        "url": "https://www.gdax.com/",
+        "api_documentation": "https://docs.gdax.com/",
+        "api_endpoints": {
+            "order_book": "",
+            "market": "",
+            "last_trades": ""
+        }
+    },
+
+    "gemini": {
+        "name": "gemini",
+        "url": "",
+        "api_documentation": "https://docs.gemini.com/rest-api/",
+        "api_endpoints": {
+            "order_book": "",
+            "market": "",
+            "last_trades": ""
+        }
+    },
+
+    "hitbtc": {
+        "name": "hitbtc",
+        "url": "",
+        "api_documentation": "https://api.hitbtc.com/",
+        "api_endpoints": {
+            "order_book": "",
+            "market": "",
+            "last_trades": ""
+        }
+    },
+
+    "huobi": {
+        "name": "huobi",
+        "url": "",
+        "api_documentation": "https://github.com/huobiapi/API_Docs_en/wiki",
+        "api_endpoints": {
+            "order_book": "",
+            "market": "",
+            "last_trades": ""
+        }
+    },
+
+    "kraken": {
+        "name": "kraken",
+        "url": "",
+        "api_documentation": "https://www.kraken.com/en-us/help/api",
+        "api_endpoints": {
+            "order_book": "",
+            "market": "",
+            "last_trades": ""
+        }
+    },
+
+    "liqui": {
+        "name": "liqui",
+        "url": "",
+        "api_documentation": "https://liqui.io/api",
+        "api_endpoints": {
+            "order_book": "",
+            "market": "",
+            "last_trades": ""
+        }
+    },
+
+    "okex": {
+        "name": "okex",
+        "url": "",
+        "api_documentation": "https://www.okex.com/intro_apiOverview.html",
+        "api_endpoints": {
+            "order_book": "",
+            "market": "",
+            "last_trades": ""
+        }
+    },
+
+    "poloniex": {
+        "name": "poloniex",
+        "url": "",
+        "api_documentation": "https://poloniex.com/support/api/",
+        "api_endpoints": {
+            "order_bok": "",
+            "market": "",
+            "last_trades": ""
+        }
+    },
+
+    "upbit": {
+        "name": "upbit",
+        "url": "",
+        "api_documentation": "https://github.com/upbit/pixivpy",
+        "api_endpoints": {
+            "order_book": "",
+            "market": "",
+            "last_trades": ""
+        }
+    }
+}
