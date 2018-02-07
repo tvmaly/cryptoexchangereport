@@ -1,12 +1,17 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 use ExchangeApiLookup;
 use Data::Dumper;
 use Role::Tiny;
 use Exchanges;
 use JSON::Parse qw/ json_file_to_perl /;
+use File::Share ':all';
+
+my $configfile = dist_file('ExchangeApiLookup','exchanges.json');
 
 my $lookup = ExchangeApiLookup->new();
-my $role = Exchanges(json_file_to_perl('/home/agmr/git/cryptoexchangereport/lib/ExchangeApiLookup/lib/exchanges.json'));
+
+my $role = Exchanges(json_file_to_perl($configfile));
+
 Role::Tiny->apply_roles_to_object($lookup, ($role));
 
 #$role->greeting();
