@@ -15,9 +15,10 @@
         "url": "https://www.bit-z.com/",
         "api_documentation": "https://www.bit-z.com/api.html",
         "api_endpoints": {
-            "order_book": "",
-            "market": "",
-            "last_trades": ""
+            "pair_sample": "eth_btc",
+            "order_book": "http://www.bit-z.com/api_v1/depth?coin=%s",
+            "market": "http://www.bit-z.com/api_v1/ticker?coin=%s",
+            "last_trades": "http://www.bit-z.com/api_v1/orders?coint=%s"
         }
     },
 
@@ -26,9 +27,10 @@
         "url": "https://www.bitfinex.com/",
         "api_documentation": "https://docs.bitfinex.com/docs",
         "api_endpoints": {
-            "order_book": "",
-            "market": "",
-            "last_trades": ""
+            "pair_sample": "BTCUSD",
+            "order_book": "https://api.bitfinex.com/v1/book/%s",
+            "market": "https://api.bitfinex.com/v1/pubticker/%s",
+            "last_trades": "https://api.bitfinex.com/v1/trades/%s"
         }
     },
 
@@ -37,9 +39,10 @@
         "url": "https://www.bithumb.com/",
         "api_documentation": "https://www.bithumb.com/u1/US127",
         "api_endpoints": {
-            "order_book": "",
-            "market": "",
-            "last_trades": ""
+            "pair_sample": "BTC",
+            "order_book": "https://api.bithumb.com/public/ticker/%s",
+            "market": "https://api.bithumb.com/public/orderbook/%s",
+            "last_trades": "https://api.bithumb.com/public/recent_transactions/%s"
         }
     },
 
@@ -48,9 +51,10 @@
         "url": "https://www.bitstamp.net/",
         "api_documentation": "https://www.bitstamp.net/api/",
         "api_endpoints": {
-            "order_book": "",
-            "market": "",
-            "last_trades": ""
+            "pair_sample": "btcusd",
+            "order_book": "https://www.bitstamp.net/api/v2/order_book/%s/",
+            "market": "https://www.bitstamp.net/api/v2/ticker/%s/",
+            "last_trades": "https://www.bitstamp.net/api/v2/transactions/%s/"
         }
     },
 
@@ -59,6 +63,7 @@
         "url": "https://bittrex.com/",
         "api_documentation": "https://bittrex.com/home/api",
         "api_endpoints": {
+            "pair_sample": "",
             "order_book": "https://bittrex.com/api/v1.1/public/getorderbook?market=%s&type=both",
             "market": "https://bittrex.com/api/v1.1/public/getticker?market=%s",
             "last_trades": "https://bittrex.com/api/v1.1/public/getmarkethistory?market=%s"
@@ -70,9 +75,10 @@
         "url": "https://coinone.co.kr/",
         "api_documentation": "http://doc.coinone.co.kr/",
         "api_endpoints": {
-            "order_book": "",
-            "market": "",
-            "last_trades": ""
+            "pair_sample": "btc",
+            "order_book": "https://api.coinone.co.kr/orderbook?currency=%s",
+            "market": "https://api.coinone.co.kr/ticker?currency=%s",
+            "last_trades": "https://api.coinone.co.kr/trades?currency=%s"
         }
     },
 
@@ -81,9 +87,10 @@
         "url": "https://www.gdax.com/",
         "api_documentation": "https://docs.gdax.com/",
         "api_endpoints": {
-            "order_book": "",
-            "market": "",
-            "last_trades": ""
+            "pair_sample": "btc-usd",
+            "order_book": "https://api.gdax.com/products/%s/book",
+            "market": "https://api.gdax.com/products/%s/ticker",
+            "last_trades": "https://api.gdax.com/products/%s/trades"
         }
     },
 
@@ -92,9 +99,10 @@
         "url": "",
         "api_documentation": "https://docs.gemini.com/rest-api/",
         "api_endpoints": {
-            "order_book": "",
-            "market": "",
-            "last_trades": ""
+            "pair_sample": "btcusd",
+            "order_book": "https://api.gemini.com/v1/book/%s",
+            "market": "https://api.gemini.com/v1/pubticker/%s",
+            "last_trades": "https://api.gemini.com/v1/trades/%s"
         }
     },
 
@@ -103,9 +111,10 @@
         "url": "",
         "api_documentation": "https://api.hitbtc.com/",
         "api_endpoints": {
-            "order_book": "",
-            "market": "",
-            "last_trades": ""
+            "pair_sample": "DASHBTC",
+            "order_book": "https://api.hitbtc.com/api/2/public/orderbook/%s",
+            "market": "https://api.hitbtc.com/api/2/public/ticker/%s",
+            "last_trades": "https://api.hitbtc.com/api/2/public/trades/%s"
         }
     },
 
@@ -114,9 +123,10 @@
         "url": "",
         "api_documentation": "https://github.com/huobiapi/API_Docs_en/wiki",
         "api_endpoints": {
-            "order_book": "",
-            "market": "",
-            "last_trades": ""
+            "pair_sample": "ethusdt",
+            "order_book": "https://api.huobi.pro/market/depth?symbol=%s",
+            "market": "https://api.huobi.pro/market/detail/merged?symbol=%s",
+            "last_trades": "https://api.huobi.pro/market/trade?symbol=%s"
         }
     },
 
@@ -125,9 +135,10 @@
         "url": "",
         "api_documentation": "https://www.kraken.com/en-us/help/api",
         "api_endpoints": {
-            "order_book": "",
-            "market": "",
-            "last_trades": ""
+            "pair_sample": "BCHEUR",
+            "order_book": "https://api.kraken.com/0/public/Depth?pair=%s",
+            "market": "https://api.kraken.com/0/public/Ticker?pair=%s",
+            "last_trades": "https://api.kraken.com/0/public/Trades?pair=%s"
         }
     },
 
@@ -136,9 +147,10 @@
         "url": "",
         "api_documentation": "https://liqui.io/api",
         "api_endpoints": {
-            "order_book": "",
-            "market": "",
-            "last_trades": ""
+            "pair_sample": "eth_btc",
+            "order_book": "https://api.liqui.io/api/3/depth/%s",
+            "market": "https://api.liqui.io/api/3/ticker/%s",
+            "last_trades": "https://api.liqui.io/api/3/trades/%s"
         }
     },
 
@@ -147,9 +159,10 @@
         "url": "",
         "api_documentation": "https://www.okex.com/intro_apiOverview.html",
         "api_endpoints": {
-            "order_book": "",
-            "market": "",
-            "last_trades": ""
+            "pair_sample": "ltc_btc",
+            "order_book": "https://www.okex.com/api/v1/depth.do?symbol=%s",
+            "market": "https://www.okex.com/api/v1/ticker.do?symbol=%s",
+            "last_trades": "https://www.okex.com/api/v1/trades.do?symbol=%s"
         }
     },
 
@@ -158,20 +171,10 @@
         "url": "",
         "api_documentation": "https://poloniex.com/support/api/",
         "api_endpoints": {
-            "order_bok": "",
-            "market": "",
-            "last_trades": ""
-        }
-    },
-
-    "upbit": {
-        "name": "upbit",
-        "url": "",
-        "api_documentation": "https://github.com/upbit/pixivpy",
-        "api_endpoints": {
-            "order_book": "",
-            "market": "",
-            "last_trades": ""
+            "pair_sample": "BTC_BCN",
+            "order_bok": "https://poloniex.com/public?command=returnOrderBook&currencyPair=%s",
+            "market": "https://poloniex.com/public?command=returnTicker",
+            "last_trades": "https://poloniex.com/public?command=returnTradeHistory&currencyPair=%s"
         }
     }
 }
