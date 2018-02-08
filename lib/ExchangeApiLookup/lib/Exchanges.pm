@@ -27,7 +27,6 @@ sub make_variant {
 
 	        install $method_name => sub {
 	            my $self = shift;
-	            print Dumper($hashmap->{$key});
 	            return $hashmap->{$key};
 	        };
 

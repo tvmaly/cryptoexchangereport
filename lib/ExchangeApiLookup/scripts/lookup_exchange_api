@@ -5,6 +5,7 @@ use Role::Tiny;
 use Exchanges;
 use JSON::Parse qw/ json_file_to_perl /;
 use File::Share ':all';
+use feature 'say';
 
 my $configfile = dist_file('ExchangeApiLookup','exchanges.json');
 
@@ -14,17 +15,22 @@ my $role = Exchanges(json_file_to_perl($configfile));
 
 Role::Tiny->apply_roles_to_object($lookup, ($role));
 
-#$role->greeting();
-#my $response = $lookup->send_request();
-#print Dumper($response->content);
-
 while (<>) {
     chomp;
 
-    my $command = join '_', split ' ';
+    my @request = split ' ';
+
+    if (scalar @request > 0 and $request[0] =~ /request|output/) {
+        my $method = shift @request;
+        my $response = $lookup->$method(@request);
+        say Dumper($response) if defined $response;
+        next;
+    } 
+
+    my $command = join '_', @request;
     
     if ($lookup->can($command)) {
-        $lookup->$command();
+        print Dumper($lookup->$command());
     } else {
         $lookup->commands;
     }
