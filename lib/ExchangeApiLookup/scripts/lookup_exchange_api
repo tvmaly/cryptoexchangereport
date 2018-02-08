@@ -22,8 +22,8 @@ while (<>) {
 
     if (scalar @request > 0 and $request[0] =~ /request|output/) {
         my $method = shift @request;
-        my $response = $lookup->$method(@request);
-        say Dumper($response) if defined $response;
+        my @response = $lookup->$method(@request);
+        say Dumper(@response) if scalar @response > 0;
         next;
     } 
 

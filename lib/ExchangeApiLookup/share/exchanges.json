@@ -173,7 +173,7 @@
         "api_documentation": "https://poloniex.com/support/api/",
         "api_endpoints": {
             "pair_sample": "BTC_BCN",
-            "order_bok": "https://poloniex.com/public?command=returnOrderBook&currencyPair=%s",
+            "order_book": "https://poloniex.com/public?command=returnOrderBook&currencyPair=%s",
             "ticker": "https://poloniex.com/public?command=returnTicker",
             "last_trades": "https://poloniex.com/public?command=returnTradeHistory&currencyPair=%s"
         }

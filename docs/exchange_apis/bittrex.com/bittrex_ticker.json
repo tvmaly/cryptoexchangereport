@@ -1,0 +1,2 @@
+# GET https://bittrex.com/api/v1.1/public/getticker?market=BTC-LTC
+{"success":true,"message":"","result":{"Bid":0.01781074,"Ask":0.01784999,"Last":0.01784999}}

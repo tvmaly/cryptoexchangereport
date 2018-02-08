@@ -1,0 +1,2 @@
+# GET https://api.coinone.co.kr/ticker?currency=btc
+{"result":"success","volume":"3706.1850","last":"8882000","yesterday_last":"8895000","timestamp":"1518067473","yesterday_low":"7560000","high":"9190000","currency":"btc","low":"8088000","errorCode":"0","yesterday_first":"7901000","yesterday_volume":"4551.4987","yesterday_high":"9190000","first":"8292000"}

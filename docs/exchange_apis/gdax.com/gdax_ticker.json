@@ -1,0 +1,2 @@
+# GET https://api.gdax.com/products/btc-usd/ticker
+{"trade_id":36548583,"price":"8099.14000000","size":"0.89760461","bid":"8096.62","ask":"8100","volume":"49999.25000290","time":"2018-02-08T05:24:33.221000Z"}

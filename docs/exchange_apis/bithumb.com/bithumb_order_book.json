@@ -1,0 +1,2 @@
+# GET https://api.bithumb.com/public/ticker/BTC
+{"status":"0000","data":{"opening_price":"8304000","closing_price":"8880000","min_price":"8070000","max_price":"9197000","average_price":"8722168.0316","units_traded":"15153.68728852","volume_1day":"15153.68728852","volume_7day":"117074.74245580","buy_price":"8881000","sell_price":"8885000","date":"1518067467728"}}

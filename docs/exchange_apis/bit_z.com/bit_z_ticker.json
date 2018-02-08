@@ -1,0 +1,2 @@
+# GET https://www.bit-z.com/api_v1/ticker?coin=eth_btc
+{"code":0,"msg":"Success","data":{"date":1518067150,"last":"0.10049970","buy":"0.10035862","sell":"0.10053700","high":"0.10207003","low":"0.09897565","vol":"67275.2650"}}

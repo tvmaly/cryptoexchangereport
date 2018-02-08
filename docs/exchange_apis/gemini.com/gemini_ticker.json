@@ -1,0 +1,2 @@
+# GET https://api.gemini.com/v1/pubticker/btcusd
+{"bid":"8087.02","ask":"8116.30","volume":{"BTC":"14073.1702942615","USD":"113137153.801903190685","timestamp":1518067200000},"last":"8087.00"}

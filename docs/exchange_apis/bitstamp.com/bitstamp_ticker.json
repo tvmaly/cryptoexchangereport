@@ -1,0 +1,2 @@
+# GET https://www.bitstamp.net/api/v2/ticker/btcusd/
+{"high": "8649.00", "last": "8113.14", "timestamp": "1518067467", "bid": "8083.11", "vwap": "8081.86", "volume": "29452.65458692", "low": "7302.35", "ask": "8107.06", "open": "7588.01"}

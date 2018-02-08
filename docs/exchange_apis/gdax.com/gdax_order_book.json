@@ -1,0 +1,2 @@
+# GET https://api.gdax.com/products/btc-usd/book
+{"sequence":5076248200,"bids":[["8096.61","2.356",2]],"asks":[["8100","0.56140747",1]]}

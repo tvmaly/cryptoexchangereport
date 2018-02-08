@@ -27,10 +27,11 @@ sub output {
     my $self = shift;
     my $file = shift;
 
-    my $response = $self->request(@_);
+    my ($message, $response) = $self->request(@_);
 
     open(my $fh, '>', $file) or die "Cannot open $file\n";
 
+    print $fh "$message\n";
     print $fh $response;
 }
     
@@ -39,7 +40,7 @@ sub request {
 
     my $url = $self->get_url(@_);
 
-    return $self->user_agent->request(HTTP::Request->new( GET => $url ))->content;
+    return ("# GET $url", $self->user_agent->request(HTTP::Request->new( GET => $url ))->content);
 }
 
 sub get_url {

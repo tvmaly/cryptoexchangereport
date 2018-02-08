@@ -1,0 +1,2 @@
+# GET https://api.bitfinex.com/v1/pubticker/BTCUSD
+{"mid":"8111.8","bid":"8111.3","ask":"8112.3","last_price":"8112.36123189","low":"7269.1","high":"8488.9","volume":"102204.32072838","timestamp":"1518067463.7983584"}
