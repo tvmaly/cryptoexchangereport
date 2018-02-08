@@ -12,7 +12,7 @@ type BitZTicker struct {
 
 type BitZQuote struct {
 	Symbol    string  `json:symbol`
-	Date      int64   `json:"date,string"`
+	Epoch     float64 `json:"date,string"`
 	LastPrice float64 `json:"last,string"`
 	BidPrice  float64 `json:"buy,string"`
 	AskPrice  float64 `json:"sell,string"`
