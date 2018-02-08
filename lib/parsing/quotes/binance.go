@@ -1,12 +1,8 @@
-package parsing
+package quotes
 
 import (
 	"encoding/json"
 )
-
-type Quote interface {
-	MidPoint() float64
-}
 
 type BinanceQuote struct {
 	Symbol      string  `json:symbol`
@@ -16,21 +12,16 @@ type BinanceQuote struct {
 	AskQuantity float64 `json:"askQty,string"`
 }
 
-func NewQuotes(exchange string, data []byte) ([]BinanceQuote, error) {
-
-	if exchange == "biance" {
-
-		var quotes []BinanceQuote
-
-		err := json.Unmarshal(data, &quotes)
-
-		return quotes, err
-
-	}
-
-	return nil, nil
+func NewBinanceQuotes(data []byte) ([]*BinanceQuote, error) {
+	var quotes []*BinanceQuote
+	err := json.Unmarshal(data, &quotes)
+	return quotes, err
 }
 
 func (q *BinanceQuote) MidPoint() float64 {
 	return (q.BidPrice*q.BidQuantity + q.AskPrice*q.AskQuantity) / (q.BidQuantity + q.AskQuantity)
+}
+
+func (q *BinanceQuote) IsWeighted() bool {
+	return true
 }
