@@ -1,19 +1,20 @@
 package ExchangeApiLookup;
+use strict;
+use warnings;
+use feature 'say';
+use version;
+our $VERSION = "1.0.0";
+
 use Moo;
 use HTTP::Request;
 use LWP::UserAgent;
 use JSON::Parse qw/ json_file_to_perl /;
-use strict;
-use warnings;
-use feature 'say';
 
 has user_agent => ( is => 'lazy' );
 
 sub _build_user_agent {
     return LWP::UserAgent->new();
 }
-
-
 
 sub commands {
     my $self = shift;

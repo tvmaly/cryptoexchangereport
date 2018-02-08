@@ -1,14 +1,14 @@
 use ExtUtils::MakeMaker;
 use File::ShareDir::Install;
 
-intall_share dist => 'share';
+install_share dist => 'share';
 
 WriteMakefile(
     NAME => "ExchangeApiLookup",
     VERSION_FROM => "lib/ExchangeApiLookup.pm",
-    EXE_FILES => {
+    EXE_FILES => [
         'scripts/lookup_exchange_api'
-    },
+    ],
 	PREREQ_PM => {
 		'Role::Tiny' => 0,
 		'Moo' => 0,
