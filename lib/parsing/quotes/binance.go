@@ -10,18 +10,20 @@ type BinanceQuote struct {
 	BidQuantity float64 `json:"bidQty,string"`
 	AskPrice    float64 `json:"askPrice,string"`
 	AskQuantity float64 `json:"askQty,string"`
+	Timestamp   float64 `json:"timestamp,string"`
 }
 
-func NewBinanceQuotes(data []byte) ([]*BinanceQuote, error) {
+func NewBinanceQuotes(data []byte, timestamp float64) ([]*BinanceQuote, error) {
 	var quotes []*BinanceQuote
 	err := json.Unmarshal(data, &quotes)
+
+	if err != nil {
+		return quotes, err
+	}
+
+	for _, v := range quotes {
+		v.Timestamp = timestamp
+	}
+
 	return quotes, err
-}
-
-func (q *BinanceQuote) MidPoint() float64 {
-	return (q.BidPrice*q.BidQuantity + q.AskPrice*q.AskQuantity) / (q.BidQuantity + q.AskQuantity)
-}
-
-func (q *BinanceQuote) IsWeighted() bool {
-	return true
 }
