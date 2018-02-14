@@ -26,7 +26,7 @@ func getCryptopairsNormalizer() {
 
 func getMarkets (url string) (map[string]bool, error) {
 
-    var currencyPairs map[string]bool
+    var currencyPairs map[string]bool = map[string]bool{}
 
     resp, err := resty.R().Get(MarketsUrl)
 

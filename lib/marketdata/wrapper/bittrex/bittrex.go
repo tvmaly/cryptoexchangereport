@@ -30,7 +30,7 @@ func New() Adapter {
 
 func (a Adapter) OrderBook (cryptoPair string) []byte {
     requestUrl := a.composeWithCurrencyPair(a.orderBookUrl, cryptoPair)
-    return a.SendRequest(requestUrl).String()
+    return a.SendRequest(requestUrl).Body()
 }
 
 func (a Adapter) Ticker (cryptoPair string) []byte {

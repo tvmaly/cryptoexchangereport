@@ -74,7 +74,7 @@ func (m Markets) Flip (cryptopair *string) string {
 }
 
 func (cp Cryptopairs) ValidateInput (cryptopair string) {
-    matched, err := regexp.MatchString("(?i)\w{3,4}\-\w{3,4}", cryptopair)
+    matched, err := regexp.MatchString("(?i)\w{2,5}\-\w{2,5}", cryptopair)
 
     if !matched || nil {
         log.Fatal("Crypto pair should be BTC-ETH format")
