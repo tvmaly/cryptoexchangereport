@@ -2,17 +2,17 @@ package quotes
 
 type BithumbQuotes struct {
 	Data struct {
-		AveragePrice string `json:"average_price"`
-		BuyPrice     string `json:"buy_price"`
-		ClosingPrice string `json:"closing_price"`
-		Date         string `json:"date"`
-		MaxPrice     string `json:"max_price"`
-		MinPrice     string `json:"min_price"`
-		OpeningPrice string `json:"opening_price"`
-		SellPrice    string `json:"sell_price"`
-		UnitsTraded  string `json:"units_traded"`
-		Volume1day   string `json:"volume_1day"`
-		Volume7day   string `json:"volume_7day"`
+		AveragePrice float64 `json:"average_price,string"`
+		BuyPrice     float64 `json:"buy_price,string"`
+		ClosingPrice float64 `json:"closing_price,string"`
+		Date         float64 `json:"date,string"`
+		MaxPrice     float64 `json:"max_price,string"`
+		MinPrice     float64 `json:"min_price,string"`
+		OpeningPrice float64 `json:"opening_price,string"`
+		SellPrice    float64 `json:"sell_price,string"`
+		UnitsTraded  float64 `json:"units_traded,string"`
+		Volume1day   float64 `json:"volume_1day,string"`
+		Volume7day   float64 `json:"volume_7day,string"`
 	} `json:"data"`
 	Status string `json:"status"`
 }

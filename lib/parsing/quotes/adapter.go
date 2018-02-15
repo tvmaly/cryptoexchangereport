@@ -2,10 +2,15 @@ package quotes
 
 import (
 	"errors"
-	"github.com/tvmaly/cryptoexchangereport/lib/parsing/exchange"
+	"github.com/tvmaly/cryptoexchangereport/lib/constants"
 	"github.com/tvmaly/cryptoexchangereport/lib/parsing/utility"
 )
 
+// GenericQuote this represents the basic set of fields that
+// we wish to assume a quote has
+// the one exception is the quantity fields
+// these are not always present and this will affect calculations
+// in respect to them being weighted by quantity values
 type GenericQuote struct {
 	Exchange    string  `json:exchange`
 	Symbol      string  `json:symbol`
@@ -16,6 +21,9 @@ type GenericQuote struct {
 	AskQuantity float64 `json:"askquantity,string"`
 }
 
+// MidPoint calculate the mid point price of a quote
+// if quantity is available, it will be weighted
+// otherwise it will be a simple midpoint
 func (q *GenericQuote) MidPoint() float64 {
 
 	if q.Weighted() {
@@ -25,22 +33,15 @@ func (q *GenericQuote) MidPoint() float64 {
 	}
 }
 
+// Weighted return true if quantity is set otherwise false
 func (q *GenericQuote) Weighted() bool {
 	return q.BidQuantity != 0 && q.AskQuantity != 0
-}
-
-func NewGenericQuote(exchange string, symbol string, rawquote interface{}) (*GenericQuote, error) {
-
-	if exchange == "gdax" {
-		return NewGenericQuoteFromGDax(exchange, symbol, rawquote)
-	}
-
 }
 
 func (t *BinanceQuote) GenericQuote() *GenericQuote {
 
 	return &GenericQuote{
-		Exchange:    exchange.BINANCE,
+		Exchange:    constants.BINANCE,
 		TimeStamp:   t.Timestamp,
 		BidPrice:    t.BidPrice,
 		BidQuantity: t.BidQuantity,
@@ -49,30 +50,40 @@ func (t *BinanceQuote) GenericQuote() *GenericQuote {
 	}
 }
 
-func (t *BitFinexQuote) GenericQuote() *GenericQuote {
-
-	return &GenericQuote{
-		Exchange:  exchange.BITFINEX,
-		TimeStamp: t.Timestamp,
-		BidPrice:  t.Bid,
-		AskPrice:  t.Ask,
-	}
-}
-
 func (t *BitZQuote) GenericQuote() *GenericQuote {
 
 	return &GenericQuote{
-		Exchange:  exchange.BITZ,
+		Exchange:  constants.BITZ,
 		TimeStamp: t.Data.Date,
 		BidPrice:  t.Data.Buy,
 		AskPrice:  t.Data.Sell,
 	}
 }
 
+func (t *BitFinexQuote) GenericQuote() *GenericQuote {
+
+	return &GenericQuote{
+		Exchange:  constants.BITFINEX,
+		TimeStamp: t.Timestamp,
+		BidPrice:  t.Bid,
+		AskPrice:  t.Ask,
+	}
+}
+
+func (t *BithumbQuotes) GenericQuote() *GenericQuote {
+
+	return &GenericQuote{
+		Exchange:  constants.BITFINEX,
+		TimeStamp: t.Data.Date,
+		BidPrice:  t.Data.BuyPrice,
+		AskPrice:  t.Data.SellPrice,
+	}
+}
+
 func (t *GDaxQuote) GenericQuote() *GenericQuote {
 
 	return &GenericQuote{
-		Exchange:  exchange.GDAX,
+		Exchange:  constants.GDAX,
 		TimeStamp: t.Time,
 		BidPrice:  t.Bid,
 		AskPrice:  t.Ask,
