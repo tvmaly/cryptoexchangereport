@@ -1,6 +1,6 @@
 package quotes
 
-type BithumbQuotes struct {
+type BithumbQuote struct {
 	Data struct {
 		AveragePrice float64 `json:"average_price,string"`
 		BuyPrice     float64 `json:"buy_price,string"`

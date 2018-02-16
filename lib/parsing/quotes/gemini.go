@@ -1,34 +1,36 @@
 package quotes
 
-type GDaxBTCUSDQuote struct {
-	Ask    string `json:"ask"`
-	Bid    string `json:"bid"`
-	Last   string `json:"last"`
-	Volume struct {
-		BTC       string `json:"BTC"`
-		USD       string `json:"USD"`
-		Timestamp int64  `json:"timestamp"`
-	} `json:"volume"`
+import "strconv"
+
+// GeminiQuote is not an ideal structure as they support only 3 pairs of coin/currency
+// and they return the symbol as a key in the JSON response
+// this requires us to represent the volume as a map rather than a struct
+// to abstract the representation of the data to a single form
+type GeminiQuote struct {
+	Ask    float64           `json:"ask,string"`
+	Bid    float64           `json:"bid,string"`
+	Last   float64           `json:"last,string"`
+	Volume map[string]string `json:"volume"`
 }
 
-type GDaxETHBTCQuote struct {
-	Ask    string `json:"ask"`
-	Bid    string `json:"bid"`
-	Last   string `json:"last"`
-	Volume struct {
-		ETH       string `json:"ETH"`
-		BTC       string `json:"BTC"`
-		Timestamp int64  `json:"timestamp"`
-	} `json:"volume"`
-}
+func (t *GeminiQuote) Timestamp() float64 {
 
-type GDaxETHUSDQuote struct {
-	Ask    string `json:"ask"`
-	Bid    string `json:"bid"`
-	Last   string `json:"last"`
-	Volume struct {
-		ETH       string `json:"ETH"`
-		USD       string `json:"USD"`
-		Timestamp int64  `json:"timestamp"`
-	} `json:"volume"`
+	for k, v := range t.Volume {
+
+		if k == "timestamp" {
+
+			ts, err := strconv.ParseFloat(v, 64)
+
+			if err != nil {
+				return 0
+			}
+
+			return ts
+
+		}
+
+	}
+
+	return 0
+
 }

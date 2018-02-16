@@ -1,6 +1,19 @@
 # cryptoexchangereport
 crypto exchange metrics important to crypto traders
 
+## Interfaces used in the system
+
+### Quotes Interfaces
+
+	type ExchangeQuote interface {
+		GenericQuote() *GenericQuote
+	}
+
+	type Quote interface {
+		MidPoint() float64
+		SpreadPercentage() float64
+		Weighted() bool
+	}
 
 ## Layout of Code
 * docs - documentation
