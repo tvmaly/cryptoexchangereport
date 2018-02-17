@@ -1,43 +1,11 @@
 package constants
 
 import (
-    "encoding/json"
-    "io/ioutil"
-    "errors"
-    "log"
+	"errors"
 )
 
-var errorLookup map[int]error 
-
-func init() {
-
-    type ErrorJson struct {
-        Code int `json:"code"`
-        Error string `json:"error"`
-    }
-
-    var errs []ErrorJson
-
-    raw, err := ioutil.ReadFile("./data/errors.json")
-    if err != nil {
-        log.Fatal(err.Error())
-    }
-
-    json.Unmarshal(raw, &errs)
-
-    for _, v := range errs {
-
-        err := errors.New(v.Error)
-
-        errorLookup[v.Code] = err
-    }
-}
-
-func Error (code int) error {
-    if errorLookup[code] != nil {
-        return errorLookup[code]
-    }
-
-    return nil
-
-}
+var (
+	ErrLimitHit       = errors.New("429: Breaking a request rate limit")
+	ErrIPAddrBanner   = errors.New("418: IP address banned for continuing to send requests after receiveng 429 code")
+	ErrOnExchangeSide = errors.New("504: Problem on an exchange side")
+)
