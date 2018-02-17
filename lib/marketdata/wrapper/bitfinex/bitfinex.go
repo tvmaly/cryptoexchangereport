@@ -1,4 +1,4 @@
-package bittrex
+package bitfinex
 
 import (
     "fmt"
@@ -42,7 +42,7 @@ func (a Adapter) LastTrades (s1, s2 string) []byte {
 func (a Adapter) SendRequest (url string) *resty.Response {
 
     if a.counter >= a.limit {
-        log.Fatalf("You hit the limit on bittrex")
+        log.Fatal("You hit the limit on bifinex")
     }
 
     resp, err := resty.R().Get(url)

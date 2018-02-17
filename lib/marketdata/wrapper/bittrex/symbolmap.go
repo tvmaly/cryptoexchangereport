@@ -9,7 +9,7 @@ import (
 
 func GetSymbolMap() *assets.SymbolMap {
 
-    symbols, err := getSymbols(MarketsUrl)
+    symbols, err := getSymbols(SymbolsUrl)
 
     if err != nil {
         log.Fatalf("Error while getting symbols from bittrex: %v", err)

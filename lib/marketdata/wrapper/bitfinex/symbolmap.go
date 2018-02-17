@@ -1,4 +1,4 @@
-package binance
+package bitfinex
 
 import (
     "log"
@@ -12,10 +12,10 @@ func GetSymbolMap() *assets.SymbolMap {
     symbols, err := getSymbols(SymbolsUrl)
 
     if err != nil {
-        log.Fatalf("Error while getting symbols from binance: %v", err)
+        log.Fatalf("Error while getting symbols from bitfinex: %v", err)
     }
 
-    return assets.NewSymbolMap("binance", "", symbols)
+    return assets.NewSymbolMap("bitfinex", "", symbols)
 }
 
 func getSymbols (url string) (map[string][2]string, error) {
