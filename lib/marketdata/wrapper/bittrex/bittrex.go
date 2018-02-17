@@ -4,11 +4,11 @@ import (
     "fmt"
     "log"
     "gopkg.in/resty.v1"
-    "cryptoexchangereport/marketdata/symbolmap"
+    "cryptoexchangereport/marketdata/assets"
 )
 
 type Adapter struct {
-    symbolMap *symbolmap.SymbolMap
+    symbolMap *assets.SymbolMap
     limit int // just a placeholder
     counter int // just a placeholder
     errorCodes map[int]string // just a placeholder
@@ -17,7 +17,7 @@ type Adapter struct {
 func New() Adapter {
 
     return Adapter{
-        symbolMap: getSymbolMap(),
+        symbolMap: GetSymbolMap(),
         limit: 500, // this is just a placeholder value
         counter: 0,
         errorCodes: map[int]string{404: "not found"}, // this is just a placeholder value

@@ -3,24 +3,24 @@ package bittrex
 import (
     "log"
     "encoding/json"
-    "cryptoexchangereport/marketdata/symbolmap"
+    "cryptoexchangereport/marketdata/assets"
     "gopkg.in/resty.v1"
 )
 
-func getSymbolMap() *symbolmap.SymbolMap {
+func GetSymbolMap() *assets.SymbolMap {
 
     symbols, err := getSymbols(MarketsUrl)
 
     if err != nil {
         log.Fatalf("Error while getting symbols from bittrex: %v", err)
     }
-    
-    return symbolmap.New("bittrex", "-", symbols)
+
+    return assets.NewSymbolMap("bittrex", "-", symbols)
 }
 
-func getSymbols (url string) (map[string]bool, error) {
+func getSymbols (url string) (map[string][2]string, error) {
 
-    var symbols map[string]bool = map[string]bool{}
+    var symbols map[string][2]string = map[string][2]string{}
 
     resp, err := resty.R().Get(url)
 
@@ -30,6 +30,8 @@ func getSymbols (url string) (map[string]bool, error) {
 
     type Market struct {
         MarketName string `json:MarketName`
+        MarketCurrency string `json:MarketCurrency`
+        BaseCurrency string `json:BaseCurrency`
     }
 
     type Markets struct {
@@ -46,7 +48,10 @@ func getSymbols (url string) (map[string]bool, error) {
     }
 
     for _, market := range result.Result {
-        symbols[(*market).MarketName] = true
+        symbols[(*market).MarketName] = [2]string{
+            (*market).MarketCurrency,
+            (*market).BaseCurrency,
+        }
     }
 
     return symbols, nil

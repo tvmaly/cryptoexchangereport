@@ -6,7 +6,7 @@ import (
 
 func TestGetSymbolMap (t *testing.T) {
 
-    symbolmap := getSymbolMap()
+    symbolmap := GetSymbolMap()
 
     symbol, err := symbolmap.GetSymbol("BTC", "LTC")
 
@@ -23,6 +23,6 @@ func TestGetSymbolMap (t *testing.T) {
     symbol, err = symbolmap.GetSymbol("this", "nott")
 
     if err == nil {
-        t.Fatalf("%s does not exists on bittrex", symbol)
+        t.Fatalf("%s does not exists on binance", symbol)
     }
 }

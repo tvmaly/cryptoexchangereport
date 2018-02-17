@@ -6,23 +6,29 @@ import (
 
 func TestGetSymbolMap (t *testing.T) {
 
-    symbolmap := getSymbolMap()
+    symbolMap := GetSymbolMap()
 
-    symbol, err := symbolmap.GetSymbol("BTC", "LTC")
-
-    if err != nil {
-        t.Fatal(err)
-    }
-
-    symbol, err = symbolmap.GetSymbol("ltc", "btc")
+    symbol, err := symbolMap.GetSymbol("BTC", "LTC")
 
     if err != nil {
         t.Fatal(err)
     }
 
-    symbol, err = symbolmap.GetSymbol("this", "nott")
+    symbol, err = symbolMap.GetSymbol("ltc", "btc")
+
+    if err != nil {
+        t.Fatal(err)
+    }
+
+    symbol, err = symbolMap.GetSymbol("this", "nott")
 
     if err == nil {
         t.Fatalf("%s does not exists on bittrex", symbol)
+    }
+
+    assets := symbolMap.GetSymbolsForAsset("BTC")
+
+    if len(assets) == 0 {
+        t.Fatalf("there are should be symbols for bittrex")
     }
 }
