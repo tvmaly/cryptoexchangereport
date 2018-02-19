@@ -13,6 +13,14 @@ type SymbolMap struct {
 
 func NewSymbolMap(exchange, delimiter string, symbols map[string][2]string) *SymbolMap {
 
+	for symbol, coin := range symbols {
+		delete(symbols, symbol)
+		symbols[strings.ToUpper(symbol)] = [2]string{
+			strings.ToUpper(coin[0]),
+			strings.ToUpper(coin[1]),
+		}
+	}
+
 	var cp SymbolMap = SymbolMap{
 		exchange:  exchange,
 		symbols:   symbols,
@@ -57,19 +65,19 @@ func (cp SymbolMap) GetSymbolsForAsset(a1 string) []string {
 	return matchedSymbols
 }
 
-func (cp SymbolMap) BuildAssetMap () *AssetMap {
+func (cp SymbolMap) BuildAssetMap() *AssetMap {
 
-    var assets map[string][]string = map[string][]string{}
+	var assets map[string][]string = map[string][]string{}
 
-    for market, coins := range cp.symbols {
-        for _, coin := range coins {
-            if val, ok := assets[coin]; ok {
-                assets[coin] = append(val, market)
-                continue
-            }
-            assets[coin] = []string{market}
-        }
-    }
+	for market, coins := range cp.symbols {
+		for _, coin := range coins {
+			if val, ok := assets[coin]; ok {
+				assets[coin] = append(val, market)
+				continue
+			}
+			assets[coin] = []string{market}
+		}
+	}
 
-    return NewAssetMap(cp.exchange, assets)
+	return NewAssetMap(cp.exchange, assets)
 }
