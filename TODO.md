@@ -28,3 +28,19 @@
 * Trades
 * Depth of Book
 
+
+## Landing page templates
+
+https://blackrockdigital.github.io/startbootstrap-landing-page/  ( this is free MIT license and I like how clean it is )
+
+### Paid templates from themeforest
+
+https://themeforest.net/item/urip-professional-landing-page-with-html-builder/11317046?s_rank=1
+
+https://themeforest.net/item/truelander-lead-generation-landing-pages/21137437?s_rank=1
+
+https://themeforest.net/item/landsay-responsive-bootstrap-4-landing-page-template/21348731
+
+
+
+
