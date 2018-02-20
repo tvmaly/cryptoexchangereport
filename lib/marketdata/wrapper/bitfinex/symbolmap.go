@@ -24,10 +24,6 @@ func getSymbols(url string) (map[string][2]string, error) {
 
 	allCoins := GetAllCoins()
 
-	if !allCoins.Exist("USD") {
-		log.Fatal("USD Does not exist")
-	}
-
 	resp, err := resty.R().Get(url)
 
 	if err != nil {
@@ -44,7 +40,7 @@ func getSymbols(url string) (map[string][2]string, error) {
 
 	for _, sym := range jsonSymbols {
 
-		coins, err := allCoins.GetCoinsFromSymbol(sym)
+		coins, err := allCoins.SliceSymbolOnCoins(sym)
 
 		if err != nil {
 			return symbols, err
@@ -70,7 +66,7 @@ func GetAllCoins() allcoin.Coins {
 	allCoins.Add("EUR", "Euro")
 
 	// Workaround as Bitfinex represents some coins differently on they API:
-	// QTUM - QTM, QASH - QSH, YOYOW - YYW, MANA - MNA. SNGLS - SNG
+	// QTUM - QTM, QASH - QSH, YOYOW - YYW, MANA - MNA, SNGLS - SNG
 	allCoins.Add("QTM", "QTUM")
 	allCoins.Add("QSH", "QASH")
 	allCoins.Add("YYW", "YOYOW")
