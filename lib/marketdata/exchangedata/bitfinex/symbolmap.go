@@ -1,16 +1,15 @@
 package bitfinex
 
 import (
-	"cryptoexchangereport/marketdata/allcoin"
 	"cryptoexchangereport/marketdata/assets"
 	"encoding/json"
+	"github.com/agmr/allcoin"
 	"gopkg.in/resty.v1"
 	"log"
 )
 
-func GetSymbolMap() *assets.SymbolMap {
-
-	symbols, err := getSymbols(SymbolsUrl)
+func NewSymbolMap() *assets.SymbolMap {
+	symbols, err := getSymbols(ApiBase + SymbolsEndpoint)
 
 	if err != nil {
 		log.Fatalf("Error while getting symbols from bitfinex: %v", err)

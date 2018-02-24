@@ -1,4 +1,4 @@
-package wrapper
+package bittrex
 
 import (
 	"cryptoexchangereport/marketdata/assets"
@@ -7,9 +7,8 @@ import (
 	"log"
 )
 
-func GetSymbolMap() *assets.SymbolMap {
-
-	symbols, err := getSymbols(SymbolsUrl)
+func NewSymbolMap() *assets.SymbolMap {
+	symbols, err := getSymbols(ApiBase + SymbolsEndpoint)
 
 	if err != nil {
 		log.Fatalf("Error while getting symbols from bittrex: %v", err)
@@ -19,7 +18,6 @@ func GetSymbolMap() *assets.SymbolMap {
 }
 
 func getSymbols(url string) (map[string][2]string, error) {
-
 	var symbols map[string][2]string = map[string][2]string{}
 
 	resp, err := resty.R().Get(url)

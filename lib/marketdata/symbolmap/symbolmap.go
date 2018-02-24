@@ -47,7 +47,7 @@ func (cp SymbolMap) GetSymbol(s1, s2 string) (string, error) {
 		return market, nil
 	}
 
-	err := fmt.Errorf("%s does not support %s - %s market\n", cp.exchange, s1, s2)
+	err := fmt.Errorf("does not support %s - %s market\n", cp.exchange, s1, s2)
 
 	return "", err
 }
