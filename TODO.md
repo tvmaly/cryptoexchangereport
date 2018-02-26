@@ -31,15 +31,33 @@
 
 ## Landing page templates
 
-https://blackrockdigital.github.io/startbootstrap-landing-page/  ( this is free MIT license and I like how clean it is )
+https://blackrockdigital.github.io/startbootstrap-landing-page/  ( this is free MIT license and I like how clean it is https://github.com/BlackrockDigital/startbootstrap-landing-page/)
 
-### Paid templates from themeforest
+### GIN server
 
-https://themeforest.net/item/urip-professional-landing-page-with-html-builder/11317046?s_rank=1
+Lets Encrypt Support
+https://github.com/gin-gonic/autotls
 
-https://themeforest.net/item/truelander-lead-generation-landing-pages/21137437?s_rank=1
+Store assets in Binary
+https://github.com/elazarl/go-bindata-assetfs
 
-https://themeforest.net/item/landsay-responsive-bootstrap-4-landing-page-template/21348731
+### AWS Parameter store for secrets
+
+https://aws.amazon.com/blogs/compute/managing-secrets-for-amazon-ecs-applications-using-parameter-store-and-iam-roles-for-tasks/
+
+https://aws.amazon.com/blogs/mt/the-right-way-to-store-secrets-using-parameter-store/
+
+### AWS S3 managing lists
+
+* given eventual consistency, we should store a last updated timestamp in UTC with objects
+
+https://docs.aws.amazon.com/AmazonS3/latest/dev/Introduction.html
+
+https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingObjects.html
+
+https://docs.aws.amazon.com/sdk-for-go/api/service/s3/
+
+https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/using-s3-with-go-sdk.html
 
 
 
