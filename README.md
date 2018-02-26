@@ -17,8 +17,11 @@ crypto exchange metrics important to crypto traders
 
 ## Layout of Code
 * docs - documentation
-* main - code to generate the binaries
+* server - code to generate the binaries that are servers
 * vendor - 3rd party code
+* scripts - utility scripts
+* assets - scss files and core files use for website
+* public - html,css,js files from assets
 * lib - library code shared across systems
 ** constants - constants used by all code
 ** client - client based code specific only to clients
