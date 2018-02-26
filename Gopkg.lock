@@ -3,6 +3,12 @@
 
 [[projects]]
   branch = "master"
+  name = "github.com/agmr/allcoin"
+  packages = ["."]
+  revision = "5285e54d71b76a91baa2ee4872f6994e8e118f38"
+
+[[projects]]
+  branch = "master"
   name = "github.com/gin-contrib/sse"
   packages = ["."]
   revision = "22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae"
@@ -34,6 +40,18 @@
   packages = ["codec"]
   revision = "9831f2c3ac1068a78f50999a30db84270f647af6"
   version = "v1.1"
+
+[[projects]]
+  name = "github.com/wellington/go-libsass"
+  packages = ["."]
+  revision = "4cdf225c9b570199942b38c82397670be237829f"
+  version = "v0.9.0"
+
+[[projects]]
+  name = "github.com/wellington/spritewell"
+  packages = ["."]
+  revision = "3a43f26d94a6da8e40884d1edca0ff372ab7487d"
+  version = "v0.4.0"
 
 [[projects]]
   branch = "master"
@@ -92,6 +110,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "0550513ad9f26d7a7319d0536b3534013bd74c0f27f26e291539d945e630064f"
+  inputs-digest = "aff63d8c1f2da51ec99df07b8fd399b282757a79b2f220a4c11ee8af1d2cc5a9"
   solver-name = "gps-cdcl"
   solver-version = 1

@@ -1,0 +1,4 @@
+machine:
+  environment:
+    CC: gcc
+    CXX: g++
