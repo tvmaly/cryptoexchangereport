@@ -1,17 +1,27 @@
 package main
 
 import (
+	"fmt"
 	libsass "github.com/wellington/go-libsass"
 	"log"
 	"os"
+	"path/filepath"
 )
 
 func main() {
 	if len(os.Args) < 2 {
-		fmt.Println("you must specify a scss file")
+		log.Fatal("you must specify a scss file")
 		return
 	}
-	r, err := os.Open(&os.Args[1])
+
+	err := os.Chdir(filepath.Dir(os.Args[1]))
+
+	if err != nil {
+		log.Fatalf("cannot change to directory where scss is: %s\n", err)
+		return
+	}
+
+	r, err := os.Open(filepath.Base(os.Args[1]))
 	if err != nil {
 		log.Fatal(err)
 	}
