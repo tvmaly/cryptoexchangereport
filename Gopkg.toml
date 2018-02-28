@@ -39,4 +39,4 @@
 
 [[constraint]]
   name = "github.com/wellington/go-libsass"
-  version = "0.9.0"
+  revision = "4271b0e669862e59ef55a22935c1fed6b146d183"

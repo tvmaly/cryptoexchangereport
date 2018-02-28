@@ -43,20 +43,17 @@
 
 [[projects]]
   name = "github.com/wellington/go-libsass"
-  packages = ["."]
-  revision = "4cdf225c9b570199942b38c82397670be237829f"
-  version = "v0.9.0"
-
-[[projects]]
-  name = "github.com/wellington/spritewell"
-  packages = ["."]
-  revision = "3a43f26d94a6da8e40884d1edca0ff372ab7487d"
-  version = "v0.4.0"
+  packages = [
+    ".",
+    "libs"
+  ]
+  revision = "4271b0e669862e59ef55a22935c1fed6b146d183"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/net"
   packages = [
+    "context",
     "idna",
     "publicsuffix"
   ]
@@ -110,6 +107,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "2af6b93d33b4e33e70e73c0b024941cc4d0f900c7642b08c9084c51cf0efc60f"
+  inputs-digest = "454a30e56240bf2b39ec3aeee2c5f8580025af40f2f238c4ada09c038a82788d"
   solver-name = "gps-cdcl"
   solver-version = 1
