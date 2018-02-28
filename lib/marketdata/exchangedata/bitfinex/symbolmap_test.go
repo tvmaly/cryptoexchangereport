@@ -8,7 +8,7 @@ func TestNewSymbolMap(t *testing.T) {
 
 	symbolmap := NewSymbolMap()
 
-	symbol, err := symbolmap.GetSymbol("BTC", "LTC")
+	symbol, err := symbolmap.GetSymbol("btc", "ltc")
 
 	if err != nil {
 		t.Fatal(err)

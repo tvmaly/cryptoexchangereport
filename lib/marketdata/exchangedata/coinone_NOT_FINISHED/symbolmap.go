@@ -1,4 +1,4 @@
-package bittrex
+package coinone
 
 import (
 	"cryptoexchangereport/marketdata/assets"
@@ -11,10 +11,10 @@ func NewSymbolMap() *assets.SymbolMap {
 	symbols, err := getSymbols(ApiBase + SymbolsEndpoint)
 
 	if err != nil {
-		log.Fatalf("Error while getting symbols from bittrex: %v", err)
+		log.Fatalf("Error while getting symbols from coinone: %v", err)
 	}
 
-	return assets.NewSymbolMap("bittrex", "-", true, symbols)
+	return assets.NewSymbolMap("coinone", "-", true, symbols)
 }
 
 func getSymbols(url string) (map[string][2]string, error) {

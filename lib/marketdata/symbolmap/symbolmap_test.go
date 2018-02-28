@@ -12,7 +12,7 @@ var symbolsTestMap map[string][2]string = map[string][2]string{
 
 func TestGetSymbol(t *testing.T) {
 
-	symbolMap := NewSymbolMap("test", "-", symbolsTestMap)
+	symbolMap := NewSymbolMap("test", "-", true, symbolsTestMap)
 
 	mySymbol, err := symbolMap.GetSymbol("BTC", "LTC")
 
@@ -35,7 +35,7 @@ func TestGetSymbol(t *testing.T) {
 
 func TestGetSymbolsForAsset(t *testing.T) {
 
-	symbolMap := NewSymbolMap("test", "-", symbolsTestMap)
+	symbolMap := NewSymbolMap("test", "-", true, symbolsTestMap)
 
 	symbols := symbolMap.GetSymbolsForAsset("BTC")
 
@@ -58,7 +58,7 @@ func TestGetSymbolsForAsset(t *testing.T) {
 
 func TestGetAssetMap(t *testing.T) {
 
-	symbolMap := NewSymbolMap("test", "-", symbolsTestMap)
+	symbolMap := NewSymbolMap("test", "-", true, symbolsTestMap)
 
 	assetMap := symbolMap.BuildAssetMap()
 

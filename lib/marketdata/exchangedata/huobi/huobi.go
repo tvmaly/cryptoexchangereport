@@ -1,25 +1,25 @@
-package bitfinex
+package huobi
 
 import (
 	"cryptoexchangereport/marketdata/exchangedata"
 )
 
-type Bitfinex struct {
+type Huobi struct {
 	exchangedata.GenericExchange
 }
 
-func New() *Bitfinex {
+func New() *Huobi {
 	return NewWithRequestSender(exchangedata.NewRequestSender())
 }
 
-func NewWithRequestSender(requestSender exchangedata.RequestSender) *Bitfinex {
+func NewWithRequestSender(requestSender exchangedata.RequestSender) *Huobi {
 	var URL map[string]string = map[string]string{
 		"OrderBookURLTemplate":  ApiBase + OrderBookEndpoint,
 		"TickerURLTemplate":     ApiBase + TickerEndpoint,
 		"LastTradesURLTemplate": ApiBase + LastTradesEndpoint,
 	}
 
-	genericExchange := exchangedata.NewGenericExchange("bitfinex", 80, NewSymbolMap(), URL, requestSender)
+	genericExchange := exchangedata.NewGenericExchange("huobi", 100, NewSymbolMap(), URL, requestSender)
 
-	return &Bitfinex{*genericExchange}
+	return &Huobi{*genericExchange}
 }

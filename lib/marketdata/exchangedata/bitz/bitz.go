@@ -1,25 +1,25 @@
-package bitfinex
+package bitz
 
 import (
 	"cryptoexchangereport/marketdata/exchangedata"
 )
 
-type Bitfinex struct {
+type BitZ struct {
 	exchangedata.GenericExchange
 }
 
-func New() *Bitfinex {
+func New() *BitZ {
 	return NewWithRequestSender(exchangedata.NewRequestSender())
 }
 
-func NewWithRequestSender(requestSender exchangedata.RequestSender) *Bitfinex {
+func NewWithRequestSender(requestSender exchangedata.RequestSender) *BitZ {
 	var URL map[string]string = map[string]string{
 		"OrderBookURLTemplate":  ApiBase + OrderBookEndpoint,
 		"TickerURLTemplate":     ApiBase + TickerEndpoint,
 		"LastTradesURLTemplate": ApiBase + LastTradesEndpoint,
 	}
 
-	genericExchange := exchangedata.NewGenericExchange("bitfinex", 80, NewSymbolMap(), URL, requestSender)
+	genericExchange := exchangedata.NewGenericExchange("BitZ", 500, NewSymbolMap(), URL, requestSender)
 
-	return &Bitfinex{*genericExchange}
+	return &BitZ{*genericExchange}
 }

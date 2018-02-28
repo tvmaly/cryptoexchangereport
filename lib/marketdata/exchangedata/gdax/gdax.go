@@ -1,25 +1,25 @@
-package bitfinex
+package gdax
 
 import (
 	"cryptoexchangereport/marketdata/exchangedata"
 )
 
-type Bitfinex struct {
+type Gdax struct {
 	exchangedata.GenericExchange
 }
 
-func New() *Bitfinex {
+func New() *Gdax {
 	return NewWithRequestSender(exchangedata.NewRequestSender())
 }
 
-func NewWithRequestSender(requestSender exchangedata.RequestSender) *Bitfinex {
+func NewWithRequestSender(requestSender exchangedata.RequestSender) *Gdax {
 	var URL map[string]string = map[string]string{
 		"OrderBookURLTemplate":  ApiBase + OrderBookEndpoint,
 		"TickerURLTemplate":     ApiBase + TickerEndpoint,
 		"LastTradesURLTemplate": ApiBase + LastTradesEndpoint,
 	}
 
-	genericExchange := exchangedata.NewGenericExchange("bitfinex", 80, NewSymbolMap(), URL, requestSender)
+	genericExchange := exchangedata.NewGenericExchange("gdax", 120, NewSymbolMap(), URL, requestSender)
 
-	return &Bitfinex{*genericExchange}
+	return &Gdax{*genericExchange}
 }

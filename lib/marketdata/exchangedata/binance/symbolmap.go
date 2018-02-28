@@ -14,7 +14,7 @@ func NewSymbolMap() *assets.SymbolMap {
 		log.Fatalf("Error while getting symbols from binance: %v", err)
 	}
 
-	return assets.NewSymbolMap("binance", "", symbols)
+	return assets.NewSymbolMap("binance", "", true, symbols)
 }
 
 func getSymbols(url string) (map[string][2]string, error) {

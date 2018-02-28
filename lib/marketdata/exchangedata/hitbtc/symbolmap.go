@@ -1,4 +1,4 @@
-package bittrex
+package hitbtc
 
 import (
 	"cryptoexchangereport/marketdata/assets"
@@ -11,10 +11,10 @@ func NewSymbolMap() *assets.SymbolMap {
 	symbols, err := getSymbols(ApiBase + SymbolsEndpoint)
 
 	if err != nil {
-		log.Fatalf("Error while getting symbols from bittrex: %v", err)
+		log.Fatalf("Error while getting symbols from hitbtc: %v", err)
 	}
 
-	return assets.NewSymbolMap("bittrex", "-", true, symbols)
+	return assets.NewSymbolMap("hitbtc", "", true, symbols)
 }
 
 func getSymbols(url string) (map[string][2]string, error) {
@@ -27,28 +27,23 @@ func getSymbols(url string) (map[string][2]string, error) {
 	}
 
 	type Market struct {
-		MarketName     string `json:MarketName`
-		MarketCurrency string `json:MarketCurrency`
-		BaseCurrency   string `json:BaseCurrency`
-	}
-
-	type Markets struct {
-		Result []*Market `json:result`
+		ID            string `json:id`
+		BaseCurrency  string `json:baseCurrency`
+		QuoteCurrency string `json:quoteCurrency`
 	}
 
 	var markets []*Market
-	var result Markets = Markets{Result: markets}
 
-	err = json.Unmarshal(resp.Body(), &result)
+	err = json.Unmarshal(resp.Body(), &markets)
 
 	if err != nil {
 		return symbols, err
 	}
 
-	for _, market := range result.Result {
-		symbols[(*market).MarketName] = [2]string{
-			(*market).MarketCurrency,
+	for _, market := range markets {
+		symbols[(*market).ID] = [2]string{
 			(*market).BaseCurrency,
+			(*market).QuoteCurrency,
 		}
 	}
 

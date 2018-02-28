@@ -1,25 +1,26 @@
-package bitfinex
+// Needs authentication for higher API requests limit!
+package kraken
 
 import (
 	"cryptoexchangereport/marketdata/exchangedata"
 )
 
-type Bitfinex struct {
+type Kraken struct {
 	exchangedata.GenericExchange
 }
 
-func New() *Bitfinex {
+func New() *Kraken {
 	return NewWithRequestSender(exchangedata.NewRequestSender())
 }
 
-func NewWithRequestSender(requestSender exchangedata.RequestSender) *Bitfinex {
+func NewWithRequestSender(requestSender exchangedata.RequestSender) *Kraken {
 	var URL map[string]string = map[string]string{
 		"OrderBookURLTemplate":  ApiBase + OrderBookEndpoint,
 		"TickerURLTemplate":     ApiBase + TickerEndpoint,
 		"LastTradesURLTemplate": ApiBase + LastTradesEndpoint,
 	}
 
-	genericExchange := exchangedata.NewGenericExchange("bitfinex", 80, NewSymbolMap(), URL, requestSender)
+	genericExchange := exchangedata.NewGenericExchange("kraken", 10, NewSymbolMap(), URL, requestSender)
 
-	return &Bitfinex{*genericExchange}
+	return &Kraken{*genericExchange}
 }

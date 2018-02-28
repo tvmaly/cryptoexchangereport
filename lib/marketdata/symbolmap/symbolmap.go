@@ -9,15 +9,24 @@ type SymbolMap struct {
 	exchange  string
 	symbols   map[string][2]string
 	delimiter string
+	IsUpper   bool
 }
 
-func NewSymbolMap(exchange, delimiter string, symbols map[string][2]string) *SymbolMap {
+func NewSymbolMap(exchange, delimiter string, isUpper bool, symbols map[string][2]string) *SymbolMap {
 
 	for symbol, coin := range symbols {
 		delete(symbols, symbol)
-		symbols[strings.ToUpper(symbol)] = [2]string{
-			strings.ToUpper(coin[0]),
-			strings.ToUpper(coin[1]),
+
+		if isUpper {
+			symbols[strings.ToUpper(symbol)] = [2]string{
+				strings.ToUpper(coin[0]),
+				strings.ToUpper(coin[1]),
+			}
+		} else {
+			symbols[strings.ToLower(symbol)] = [2]string{
+				strings.ToLower(coin[0]),
+				strings.ToLower(coin[1]),
+			}
 		}
 	}
 
@@ -25,6 +34,7 @@ func NewSymbolMap(exchange, delimiter string, symbols map[string][2]string) *Sym
 		exchange:  exchange,
 		symbols:   symbols,
 		delimiter: delimiter,
+		IsUpper:   isUpper,
 	}
 
 	return &cp
@@ -32,8 +42,8 @@ func NewSymbolMap(exchange, delimiter string, symbols map[string][2]string) *Sym
 
 func (cp SymbolMap) GetSymbol(s1, s2 string) (string, error) {
 
-	s1 = strings.ToUpper(s1)
-	s2 = strings.ToUpper(s2)
+	s1 = cp.FixCase(s1)
+	s2 = cp.FixCase(s2)
 
 	market := strings.Join([]string{s1, s2}, cp.delimiter)
 
@@ -47,13 +57,16 @@ func (cp SymbolMap) GetSymbol(s1, s2 string) (string, error) {
 		return market, nil
 	}
 
-	err := fmt.Errorf("does not support %s - %s market\n", cp.exchange, s1, s2)
+	err := fmt.Errorf("%s does not support %s market\n", cp.exchange, s1, s2)
 
 	return "", err
 }
 
 func (cp SymbolMap) GetSymbolsForAsset(a1 string) []string {
 	var matchedSymbols []string
+
+	a1 = cp.FixCase(a1)
+
 	for symbol, assets := range cp.symbols {
 
 		if assets[0] == a1 || assets[1] == a1 {
@@ -80,4 +93,12 @@ func (cp SymbolMap) BuildAssetMap() *AssetMap {
 	}
 
 	return NewAssetMap(cp.exchange, assets)
+}
+
+func (cp SymbolMap) FixCase(symbol string) string {
+	if cp.IsUpper {
+		return strings.ToUpper(symbol)
+	} else {
+		return strings.ToLower(symbol)
+	}
 }
