@@ -1,5 +1,6 @@
 package exchangedata
 
+/*
 import (
 	"encoding/json"
 	"fmt"
@@ -82,4 +83,4 @@ func (ge *GenericExchange) Limit() int {
 
 func (ge *GenericExchange) IsLimit(count int) bool {
 	return ge.Limit()-count <= 5
-}
+}*/

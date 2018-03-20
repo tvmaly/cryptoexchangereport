@@ -5,11 +5,34 @@ import (
 )
 
 type Binance struct {
-	exchangedata.GenericExchange
+	assets.ExchangeAssetsChecker
+	name string
+    limit exchangedata.LimitCounter
+    requestSender exchangedata.RequestSender
 }
 
-func New() *Binance {
-	return NewWithRequestSender(exchangedata.NewRequestSender())
+func New() exchangedata.Exchange {
+	return
+}
+
+func (b *Binance) Name() string {
+	return b.name
+}
+
+func (b *Binance) OrderBook(string, string) ([]byte, error) {
+}
+
+func (b *Binance) Ticker(string, string) ([]byte, error) {
+}
+
+func (b *Binance) LastTrades(string, string) ([]byte, error) {
+}
+
+func (b *Binance) prepareURL (url, coin1, coin2 string) string {
+    pair, err := b.Pair(coin1, coin2)
+    url := fmt.Sprintf(url, pair)
+
+    response, err := b.SendRequest(urlTemplate
 }
 
 func NewWithRequestSender(requestSender exchangedata.RequestSender) *Binance {

@@ -7,14 +7,14 @@ import (
 	"log"
 )
 
-func NewSymbolMap() *assets.SymbolMap {
+func NewSymbolMap() assets.ExchangeAssetsChecker {
 	symbols, err := getSymbols(ApiBase + SymbolsEndpoint)
 
 	if err != nil {
 		log.Fatalf("Error while getting symbols from binance: %v", err)
 	}
 
-	return assets.NewSymbolMap("binance", "", true, symbols)
+	return assets.New(symbols, "", true)
 }
 
 func getSymbols(url string) (map[string][2]string, error) {

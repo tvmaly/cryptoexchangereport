@@ -18,7 +18,7 @@ type CryptoPairChecker interface {
 	PairExist(string) bool
 }
 
-type ExchangeAssetChecker interface {
+type ExchangeAssetsChecker interface {
 	CryptoCoinChecker
 	CryptoPairChecker
 }
@@ -36,7 +36,7 @@ type ExchangeAssetsLookup struct {
 // assets <map[string][2]string>. Each key is a coins pair and value is a coins that makes up this pair. Will build underlying data structure from it
 // delimiter <string>. To Join coins for a Pair() method.
 // caseFlag <bool>: true - uppercase, false - lowercase. To build caseAdjuster closure
-func New(assets map[string][2]string, delimiter string, caseFlag bool) ExchangeAssetChecker {
+func New(assets map[string][2]string, delimiter string, caseFlag bool) ExchangeAssetsChecker {
 	coinToPairs := map[string][]string{}
 	pairToCoins := map[string][2]string{}
 	var caseAdjuster func(...*string)

@@ -10,7 +10,7 @@ var TestAssets map[string][2]string = map[string][2]string{
 	"ENG-ETH": [2]string{"ENG", "ETH"},
 }
 
-var eal ExchangeAssetChecker = New(TestAssets, "-", true)
+var eal ExchangeAssetsChecker = New(TestAssets, "-", true)
 
 func TestPair(t *testing.T) {
 	myPair, err := eal.Pair("BTC", "LTC")
