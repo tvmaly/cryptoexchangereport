@@ -2,12 +2,13 @@ package exchangedata
 
 import (
 	"testing"
+	"time"
 )
 
 var TLimit LimitCounter
 
 func init() {
-	TLimit = New(3)
+	TLimit = New(3, MockgetExpiredCounts())
 }
 
 func TestCounter(t *testing.T) {
@@ -46,14 +47,18 @@ func TestLimit(t *testing.T) {
 	if TLimit.Limit() != 10 {
 		t.Fatalf("SetLimit does not set limit, limit is at %d", TLimit.Counter())
 	}
+
 }
 
-/*
-type LimitCounter interface {
-	UpperLimit() int
-	Counter() int
-	Hit(int) error
-	SetLimit(int)
-	SetCounter(int)
+func TestExpiration(t *testing.T) {
+	TLimit.SetLimit(4)
+	TLimit.SetCounter(0)
+
+	TLimit.Hit(3)
+
+	time.Sleep(4000 * time.Millisecond)
+
+	if TLimit.Counter() != 0 {
+		t.Fatalf("Refresh does not work! After 3 seconds counter is %d", TLimit.Counter())
+	}
 }
-*/
