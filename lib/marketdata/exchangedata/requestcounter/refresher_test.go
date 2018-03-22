@@ -12,7 +12,7 @@ func TestRefresher(t *testing.T) {
 
 	fmt.Printf("Initial counter value is %d\n", counter)
 
-	refresher = NewSimpleRefresher(1)
+	refresher = NewSimpleRefresher(1000)
 
 	counter = refresher.Refresh(counter)
 	VerifyCounter(t, 0, 4, counter)

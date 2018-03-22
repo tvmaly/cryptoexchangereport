@@ -1,9 +1,13 @@
+//requestcounter
+//Exchanges impose limits on api request rate. Exceeding this limits could result in //a temporary ban from api requests, which is non-acceptable situation for our service.
+//In order to make sure that we do not exceed api requests rate limit, we need a smart counter.
 package requestcounter
 
 import (
 	"errors"
 )
 
+//Simple RequestCounter interace
 type RequestCounter interface {
 	IsLimit(int) bool
 	Hit(int) error
@@ -14,11 +18,13 @@ type RequestCounter interface {
 	GetCounter() int
 }
 
+//RequestCounter with Refresher logic
 type AutoRefreshedRequestCounter interface {
 	RequestCounter
 	Refresh()
 }
 
+//Simple struct that implements AutoRefreshedRequestCounter interface
 type ExchangeAPIRequestCounter struct {
 	refresher Refresher
 	limit     int
@@ -29,15 +35,21 @@ func New(limit int, refresher Refresher) AutoRefreshedRequestCounter {
 	return &ExchangeAPIRequestCounter{refresher, limit, 0}
 }
 
+//Limit Getter
 func (earc *ExchangeAPIRequestCounter) GetLimit() int { return earc.limit }
 
+//Limit Setter
+func (earc *ExchangeAPIRequestCounter) SetLimit(newLimit int) { earc.limit = newLimit }
+
+//Counter Getter
+//Always refreshes counter before returning its value
 func (earc *ExchangeAPIRequestCounter) GetCounter() int {
 	earc.Refresh()
 	return earc.counter
 }
 
-func (earc *ExchangeAPIRequestCounter) SetLimit(newLimit int) { earc.limit = newLimit }
-
+//Counter Setter
+//Will return an error if specified counter > current limit
 func (earc *ExchangeAPIRequestCounter) SetCounter(newCounter int) error {
 	if earc.GetLimit() < newCounter {
 		err := errors.New("Counter cannot be bigger then a limit")
@@ -49,10 +61,14 @@ func (earc *ExchangeAPIRequestCounter) SetCounter(newCounter int) error {
 	}
 }
 
+//Refreshes our counter
+//passes counter to our refresher strategy and assings received value to our counter
 func (earc *ExchangeAPIRequestCounter) Refresh() {
 	earc.SetCounter(earc.refresher.Refresh(earc.counter))
 }
 
+//Increments counter on a specified amount
+//Will return an error if counter value + specified amount > limit
 func (earc *ExchangeAPIRequestCounter) Hit(pointsToHit int) error {
 	if earc.GetCounter()+pointsToHit < earc.GetLimit() {
 		earc.SetCounter(earc.counter + pointsToHit)
@@ -65,6 +81,8 @@ func (earc *ExchangeAPIRequestCounter) Hit(pointsToHit int) error {
 	}
 }
 
+//Checks if we can send particulart request
+//Returns true if yes, false otherwise
 func (earc *ExchangeAPIRequestCounter) IsLimit(pointsToHit int) bool {
 	if pointsToHit+earc.GetCounter() < earc.GetLimit() {
 		return true
