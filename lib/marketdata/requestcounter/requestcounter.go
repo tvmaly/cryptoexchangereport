@@ -81,12 +81,12 @@ func (earc *ExchangeAPIRequestCounter) Hit(pointsToHit int) error {
 	}
 }
 
-//Checks if we can send particulart request
+//Checks if request will hit the limit
 //Returns true if yes, false otherwise
 func (earc *ExchangeAPIRequestCounter) IsLimit(pointsToHit int) bool {
 	if pointsToHit+earc.GetCounter() < earc.GetLimit() {
-		return true
-	} else {
 		return false
+	} else {
+		return true
 	}
 }

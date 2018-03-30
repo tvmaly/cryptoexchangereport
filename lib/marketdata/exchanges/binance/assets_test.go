@@ -5,7 +5,6 @@ import (
 )
 
 func TestNewSymbolMap(t *testing.T) {
-
 	symbolmap := NewSymbolMap()
 
 	symbol, err := symbolmap.GetSymbol("BTC", "LTC")

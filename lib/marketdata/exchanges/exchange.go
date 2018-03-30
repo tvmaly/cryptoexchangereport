@@ -1,4 +1,4 @@
-package exchangedata
+package exchanges
 
 import (
 	"cryptoexchangereport/marketdata/assets"
