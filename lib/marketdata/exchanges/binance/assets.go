@@ -7,7 +7,7 @@ import (
 	"log"
 )
 
-func NewExchangeAssetsLookup() assets.ExchangeAssetsChecker {
+func NewExchangeAssetsEnum() assets.ExchangeAssetsChecker {
 	symbols, err := getSymbols(ApiBase + SymbolsEndpoint)
 
 	if err != nil {

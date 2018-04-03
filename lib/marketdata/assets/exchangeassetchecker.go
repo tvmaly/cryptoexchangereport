@@ -24,7 +24,7 @@ type ExchangeAssetsChecker interface {
 }
 
 // Underlying struct
-type ExchangeAssetsLookup struct {
+type ExchangeAssetsEnum struct {
 	coinToPairs map[string][]string
 	pairToCoins map[string][2]string
 	delimiter   string
@@ -62,7 +62,7 @@ func New(assets map[string][2]string, delimiter string, caseFlag bool) ExchangeA
 		}
 	}
 
-	return &ExchangeAssetsLookup{
+	return &ExchangeAssetsEnum{
 		coinToPairs,
 		pairToCoins,
 		delimiter,
@@ -81,27 +81,27 @@ func WrapWithVariadicArgs(adjustCase func(string) string) func(...*string) {
 }
 
 // Returns all the current pairs
-func (eal ExchangeAssetsLookup) Pairs() []string {
-	pairs := make([]string, 0, len(eal.pairToCoins))
-	for pair := range eal.pairToCoins {
+func (eae ExchangeAssetsEnum) Pairs() []string {
+	pairs := make([]string, 0, len(eae.pairToCoins))
+	for pair := range eae.pairToCoins {
 		pairs = append(pairs, pair)
 	}
 	return pairs
 }
 
 // Given two coins will return a pair if it exists, otherwise - empty string and error
-func (eal ExchangeAssetsLookup) Pair(coin1, coin2 string) (string, error) {
-	eal.adjustCase(&coin1, &coin2)
+func (eae ExchangeAssetsEnum) Pair(coin1, coin2 string) (string, error) {
+	eae.adjustCase(&coin1, &coin2)
 
-	pair := strings.Join([]string{coin1, coin2}, eal.delimiter)
+	pair := strings.Join([]string{coin1, coin2}, eae.delimiter)
 
-	if eal.PairExist(pair) {
+	if eae.PairExist(pair) {
 		return pair, nil
 	}
 
-	pair = strings.Join([]string{coin2, coin1}, eal.delimiter)
+	pair = strings.Join([]string{coin2, coin1}, eae.delimiter)
 
-	if eal.PairExist(pair) {
+	if eae.PairExist(pair) {
 		return pair, nil
 	}
 
@@ -111,9 +111,9 @@ func (eal ExchangeAssetsLookup) Pair(coin1, coin2 string) (string, error) {
 }
 
 // Returns true if pair exists, otherwise false
-func (eal ExchangeAssetsLookup) PairExist(pair string) bool {
-	eal.adjustCase(&pair)
-	if _, ok := eal.pairToCoins[pair]; ok {
+func (eae ExchangeAssetsEnum) PairExist(pair string) bool {
+	eae.adjustCase(&pair)
+	if _, ok := eae.pairToCoins[pair]; ok {
 		return true
 	} else {
 		return false
@@ -121,26 +121,26 @@ func (eal ExchangeAssetsLookup) PairExist(pair string) bool {
 }
 
 // Returns all the current coins
-func (eal ExchangeAssetsLookup) Coins() []string {
-	coins := make([]string, 0, len(eal.coinToPairs))
-	for coin := range eal.coinToPairs {
+func (eae ExchangeAssetsEnum) Coins() []string {
+	coins := make([]string, 0, len(eae.coinToPairs))
+	for coin := range eae.coinToPairs {
 		coins = append(coins, coin)
 	}
 	return coins
 }
 
 // Returns all Pairs for a given coin
-func (eal ExchangeAssetsLookup) GetPairsForCoin(coin string) ([]string, error) {
-	eal.adjustCase(&coin)
+func (eae ExchangeAssetsEnum) GetPairsForCoin(coin string) ([]string, error) {
+	eae.adjustCase(&coin)
 
 	var pairs []string
 
-	if !eal.CoinExist(coin) {
+	if !eae.CoinExist(coin) {
 		err := fmt.Errorf("%s is not found", coin)
 		return pairs, err
 
 	} else {
-		pairs = eal.coinToPairs[coin]
+		pairs = eae.coinToPairs[coin]
 
 		if len(pairs) == 0 {
 			err := fmt.Errorf("Zero symbols for existing coin %s\n", coin)
@@ -152,9 +152,9 @@ func (eal ExchangeAssetsLookup) GetPairsForCoin(coin string) ([]string, error) {
 }
 
 // Returns true if coin exists, otherwise false
-func (eal ExchangeAssetsLookup) CoinExist(coin string) bool {
-	eal.adjustCase(&coin)
-	if _, ok := eal.coinToPairs[coin]; ok {
+func (eae ExchangeAssetsEnum) CoinExist(coin string) bool {
+	eae.adjustCase(&coin)
+	if _, ok := eae.coinToPairs[coin]; ok {
 		return true
 	} else {
 		return false

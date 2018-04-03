@@ -6,8 +6,8 @@ import (
 
 var exchange *Binance = New()
 
-func TestOrderBook(t *testing.T) {
-	orderBookUrl := exchange.OrderBookURLTemplate()
+func TestOrderBookUrl(t *testing.T) {
+	orderBookUrl := exchange.getOrderBookUrl()
 
 	expectedUrl := ApiBase + OrderBookEndpoint
 
@@ -16,8 +16,8 @@ func TestOrderBook(t *testing.T) {
 	}
 }
 
-func TestTicker(t *testing.T) {
-	tickerUrl := exchange.TickerURLTemplate()
+func TestTickerUrl(t *testing.T) {
+	tickerUrl := exchange.getTickerUrl()
 
 	expectedUrl := ApiBase + TickerEndpoint
 
@@ -26,8 +26,8 @@ func TestTicker(t *testing.T) {
 	}
 }
 
-func TestLastTrades(t *testing.T) {
-	lastTrades := exchange.LastTradesURLTemplate()
+func TestLastTradesUrl(t *testing.T) {
+	lastTrades := exchange.getLastTradesUrl()
 
 	expectedUrl := ApiBase + LastTradesEndpoint
 
@@ -43,5 +43,11 @@ func TestLimit(t *testing.T) {
 
 	if !exchange.IsLimit(500) {
 		t.Error("Should be an error. 500 count.")
+	}
+
+	exchange.OrderBook("BTC", "LTC")
+
+	if exchange.GetCounter() != 1 {
+		t.Errorf("Counter should be 1, as we requested OrderBook. We have: %d\n", exchange.GetCounter())
 	}
 }
