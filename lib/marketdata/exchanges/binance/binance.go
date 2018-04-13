@@ -5,14 +5,14 @@ import (
 	"log"
 	"strings"
 
-	"cryptoexchangereport/marketdata/assets"
 	"cryptoexchangereport/marketdata/errors"
+	"cryptoexchangereport/marketdata/exchangemarkets"
 	"cryptoexchangereport/marketdata/exchanges"
 	"cryptoexchangereport/marketdata/requestcounter"
 )
 
 type Binance struct {
-	assets.ExchangeAssetsChecker
+	exchangemarkets.ExchangeMarkets
 	exchanges.RequestSender
 	requestcounter.AutoRefreshedRequestCounter
 	name string
@@ -22,7 +22,7 @@ func New() *Binance {
 	limit := requestcounter.New(60, requestcounter.NewSimpleRefresher(1))
 
 	return &Binance{
-		NewExchangeAssetsEnum(),
+		GetExchangeMarkets(),
 		exchanges.NewRequestSender(),
 		limit,
 		"binance",

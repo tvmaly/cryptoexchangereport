@@ -1,7 +1,7 @@
 package exchanges
 
 import (
-	"cryptoexchangereport/marketdata/assets"
+	"cryptoexchangereport/marketdata/exchangemarkets"
 )
 
 type Exchange interface {
@@ -9,5 +9,6 @@ type Exchange interface {
 	OrderBook(string, string) (Response, error)
 	Ticker(string, string) (Response, error)
 	LastTrades(string, string) (Response, error)
-	assets.ExchangeAssetsChecker
+	exchangemarkets.ExchangeMarkets
+	GetExchangeMarkets() exchangemarkets.ExchangeMarkets
 }

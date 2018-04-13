@@ -1,19 +1,19 @@
 package cointracker
 
 import (
-	"cryptoexchangereport/marketdata/assets"
+	"cryptoexchangereport/marketdata/exchangemarkets"
 	"cryptoexchangereport/marketdata/exchanges/assetsenumfactory"
 	"fmt"
 )
 
 type CoinTracker interface {
 	CheckForAddedCoins() *AddedCoinsStorage
-	AddExchangeAssetsEnum(string, assets.ExchangeAssetsChecker) error
+	AddExchangeAssetsEnum(string, exchangmarkets.ExchangeAssetsChecker) error
 	RemoveExchangeAssetsEnum(string)
 }
 
 type ConcreteCoinTracker struct {
-	assetsCheckers map[string]assets.ExchangeAssetsChecker
+	marketsRepository map[string]exchangemarkets.ExchangeAssetsChecker
 }
 
 func New() *ConcreteCoinTracker {
@@ -23,7 +23,7 @@ func New() *ConcreteCoinTracker {
 func (cct *ConcreteCoinTracker) CheckForAddedCoins() *AddedCoinsStorage {
 	var addedCoinsStorage *AddedCoinsStorage = NewAddedCoinsStorage()
 
-	for exchange, currentExchangeAssetLookup := range cct.assetsCheckers {
+	for exchange, currentExchangeAssetLookup := range cct.marketsRepository {
 		newExchangeAssetLookup := assetsenumfactory.NewExchangeAssetsEnum(exchange)
 		newCoins := Compare(newExchangeAssetLookup, currentExchangeAssetLookup)
 		if newCoins != nil {
@@ -35,16 +35,16 @@ func (cct *ConcreteCoinTracker) CheckForAddedCoins() *AddedCoinsStorage {
 }
 
 func (cct *ConcreteCoinTracker) AddExchangeAssetsEnum(exchange string) error {
-	if _, ok := cct.assetsCheckers[exchange]; ok {
+	if _, ok := cct.marketsRepository[exchange]; ok {
 		err := fmt.Errorf("We already tracking %s")
 		return err
 	} else {
-		cct.assetsCheckers[exchange] = assetsenumfactory.NewExchangeAssetsEnum(exchange)
+		cct.marketsRepository[exchange] = assetsenumfactory.NewExchangeAssetsEnum(exchange)
 	}
 }
 
 func (cct *ConcreteCoinTracker) RemoveExchangeAssetsEnum(exchange string) {
-	delete(cct.assetsCheckers, exchange)
+	delete(cct.marketsRepository, exchange)
 }
 
 func Compare() {

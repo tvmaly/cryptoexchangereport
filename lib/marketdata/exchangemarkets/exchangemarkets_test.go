@@ -1,31 +1,31 @@
-package assets
+package exchangemarkets
 
 import (
 	"testing"
 )
 
-var TestAssets map[string][2]string = map[string][2]string{
+var TestMarkets map[string][2]string = map[string][2]string{
 	"LTC-BTC": [2]string{"LTC", "BTC"},
 	"ETH-BTC": [2]string{"ETH", "BTC"},
 	"ENG-ETH": [2]string{"ENG", "ETH"},
 }
 
-var eae ExchangeAssetsChecker = New(TestAssets, "-", true)
+var em ExchangeMarkets = New(TestMarkets, "-", true)
 
 func TestPair(t *testing.T) {
-	myPair, err := eae.Pair("BTC", "LTC")
+	myPair, err := em.Pair("BTC", "LTC")
 
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	myPair, err = eae.Pair("btc", "ltc")
+	myPair, err = em.Pair("btc", "ltc")
 
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	myPair, err = eae.Pair("BTC", "WAKA")
+	myPair, err = em.Pair("BTC", "WAKA")
 
 	if err == nil {
 		t.Fatalf("BTC-WAKA does not exists, should have to output error, but instead gave %s", myPair)
@@ -33,7 +33,7 @@ func TestPair(t *testing.T) {
 }
 
 func TestGetPairsForCoin(t *testing.T) {
-	pairs, err := eae.GetPairsForCoin("btc")
+	pairs, err := em.GetPairsForCoin("btc")
 
 	if err != nil {
 		t.Fatal(err)
@@ -43,7 +43,7 @@ func TestGetPairsForCoin(t *testing.T) {
 		t.Fatalf("GetPairsForCoin() Error, %v", pairs)
 	}
 
-	pairs, err = eae.GetPairsForCoin("ENG")
+	pairs, err = em.GetPairsForCoin("ENG")
 
 	if err != nil {
 		t.Fatal(err)
@@ -55,14 +55,14 @@ func TestGetPairsForCoin(t *testing.T) {
 }
 
 func TestPairs(t *testing.T) {
-	pairs := eae.Pairs()
+	pairs := em.Pairs()
 	if len(pairs) != 3 {
 		t.Fatalf("Pairs() Error, %v", pairs)
 	}
 }
 
 func TestCoins(t *testing.T) {
-	coins := eae.Coins()
+	coins := em.Coins()
 	if len(coins) != 4 {
 		t.Fatalf("Coins() Error, %v", coins)
 	}
@@ -72,11 +72,11 @@ func TestPairExist(t *testing.T) {
 	invalidPair := "BTC-WAKA"
 	validPair := "LTC-BTC"
 
-	if eae.PairExist(invalidPair) {
+	if em.PairExist(invalidPair) {
 		t.Fatalf("PairExist() Error, %s should not exist", invalidPair)
 	}
 
-	if !eae.PairExist(validPair) {
+	if !em.PairExist(validPair) {
 		t.Fatalf("PairExist() Error, %s shoul exist", validPair)
 	}
 }
@@ -85,11 +85,11 @@ func TestCoinExist(t *testing.T) {
 	invalidCoin := "WAKA"
 	validCoin := "ENG"
 
-	if eae.CoinExist(invalidCoin) {
+	if em.CoinExist(invalidCoin) {
 		t.Fatalf("CoinExist() Error, %s should not exist", invalidCoin)
 	}
 
-	if !eae.CoinExist(validCoin) {
+	if !em.CoinExist(validCoin) {
 		t.Fatalf("CoinExist() Error, %s should exist", validCoin)
 	}
 }

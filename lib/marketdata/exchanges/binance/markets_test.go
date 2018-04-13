@@ -5,7 +5,7 @@ import (
 )
 
 func TestNewSymbolMap(t *testing.T) {
-	assetenum := NewExchangeAssetsEnum()
+	assetenum := GetExchangeMarkets()
 
 	symbol, err := assetenum.Pair("BTC", "LTC")
 

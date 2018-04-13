@@ -1,20 +1,20 @@
 package binance
 
 import (
-	"cryptoexchangereport/marketdata/assets"
+	"cryptoexchangereport/marketdata/exchangemarkets"
 	"encoding/json"
 	"gopkg.in/resty.v1"
 	"log"
 )
 
-func NewExchangeAssetsEnum() assets.ExchangeAssetsChecker {
+func GetExchangeMarkets() exchangemarkets.ExchangeMarkets {
 	symbols, err := getSymbols(ApiBase + SymbolsEndpoint)
 
 	if err != nil {
 		log.Fatalf("Error while getting symbols from binance: %v", err)
 	}
 
-	return assets.New(symbols, "", true)
+	return exchangemarkets.New(symbols, "", true)
 }
 
 func getSymbols(url string) (map[string][2]string, error) {

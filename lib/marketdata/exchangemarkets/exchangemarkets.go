@@ -1,30 +1,30 @@
 // module to control both cryptocurrency coins and pairs
-package assets
+package exchangemarkets
 
 import (
 	"fmt"
 	"strings"
 )
 
-type CryptoCoinChecker interface {
+type ExchangeCoinsRepository interface {
 	Coins() []string
 	GetPairsForCoin(string) ([]string, error)
 	CoinExist(string) bool
 }
 
-type CryptoPairChecker interface {
+type ExchangePairsRepository interface {
 	Pairs() []string
 	Pair(string, string) (string, error)
 	PairExist(string) bool
 }
 
-type ExchangeAssetsChecker interface {
-	CryptoCoinChecker
-	CryptoPairChecker
+type ExchangeMarkets interface {
+	ExchangeCoinsRepository
+	ExchangePairsRepository
 }
 
 // Underlying struct
-type ExchangeAssetsEnum struct {
+type ExchangeMarketsRepository struct {
 	coinToPairs map[string][]string
 	pairToCoins map[string][2]string
 	delimiter   string
@@ -33,10 +33,10 @@ type ExchangeAssetsEnum struct {
 
 // Constructor.
 // Arguments:
-// assets <map[string][2]string>. Each key is a coins pair and value is a coins that makes up this pair. Will build underlying data structure from it
+// markets <map[string][2]string>. Each key is a coins pair and value is a coins that makes up this pair. Will build underlying data structure from it
 // delimiter <string>. To Join coins for a Pair() method.
 // caseFlag <bool>: true - uppercase, false - lowercase. To build caseAdjuster closure
-func New(assets map[string][2]string, delimiter string, caseFlag bool) ExchangeAssetsChecker {
+func New(markets map[string][2]string, delimiter string, caseFlag bool) ExchangeMarkets {
 	coinToPairs := map[string][]string{}
 	pairToCoins := map[string][2]string{}
 	var caseAdjuster func(...*string)
@@ -47,7 +47,7 @@ func New(assets map[string][2]string, delimiter string, caseFlag bool) ExchangeA
 		caseAdjuster = WrapWithVariadicArgs(strings.ToLower)
 	}
 
-	for pair, coins := range assets {
+	for pair, coins := range markets {
 		caseAdjuster(&pair, &coins[0], &coins[1])
 
 		pairToCoins[pair] = coins
@@ -62,7 +62,7 @@ func New(assets map[string][2]string, delimiter string, caseFlag bool) ExchangeA
 		}
 	}
 
-	return &ExchangeAssetsEnum{
+	return &ExchangeMarketsRepository{
 		coinToPairs,
 		pairToCoins,
 		delimiter,
@@ -81,27 +81,27 @@ func WrapWithVariadicArgs(adjustCase func(string) string) func(...*string) {
 }
 
 // Returns all the current pairs
-func (eae ExchangeAssetsEnum) Pairs() []string {
-	pairs := make([]string, 0, len(eae.pairToCoins))
-	for pair := range eae.pairToCoins {
+func (em ExchangeMarketsRepository) Pairs() []string {
+	pairs := make([]string, 0, len(em.pairToCoins))
+	for pair := range em.pairToCoins {
 		pairs = append(pairs, pair)
 	}
 	return pairs
 }
 
 // Given two coins will return a pair if it exists, otherwise - empty string and error
-func (eae ExchangeAssetsEnum) Pair(coin1, coin2 string) (string, error) {
-	eae.adjustCase(&coin1, &coin2)
+func (em ExchangeMarketsRepository) Pair(coin1, coin2 string) (string, error) {
+	em.adjustCase(&coin1, &coin2)
 
-	pair := strings.Join([]string{coin1, coin2}, eae.delimiter)
+	pair := strings.Join([]string{coin1, coin2}, em.delimiter)
 
-	if eae.PairExist(pair) {
+	if em.PairExist(pair) {
 		return pair, nil
 	}
 
-	pair = strings.Join([]string{coin2, coin1}, eae.delimiter)
+	pair = strings.Join([]string{coin2, coin1}, em.delimiter)
 
-	if eae.PairExist(pair) {
+	if em.PairExist(pair) {
 		return pair, nil
 	}
 
@@ -111,9 +111,9 @@ func (eae ExchangeAssetsEnum) Pair(coin1, coin2 string) (string, error) {
 }
 
 // Returns true if pair exists, otherwise false
-func (eae ExchangeAssetsEnum) PairExist(pair string) bool {
-	eae.adjustCase(&pair)
-	if _, ok := eae.pairToCoins[pair]; ok {
+func (em ExchangeMarketsRepository) PairExist(pair string) bool {
+	em.adjustCase(&pair)
+	if _, ok := em.pairToCoins[pair]; ok {
 		return true
 	} else {
 		return false
@@ -121,26 +121,26 @@ func (eae ExchangeAssetsEnum) PairExist(pair string) bool {
 }
 
 // Returns all the current coins
-func (eae ExchangeAssetsEnum) Coins() []string {
-	coins := make([]string, 0, len(eae.coinToPairs))
-	for coin := range eae.coinToPairs {
+func (em ExchangeMarketsRepository) Coins() []string {
+	coins := make([]string, 0, len(em.coinToPairs))
+	for coin := range em.coinToPairs {
 		coins = append(coins, coin)
 	}
 	return coins
 }
 
 // Returns all Pairs for a given coin
-func (eae ExchangeAssetsEnum) GetPairsForCoin(coin string) ([]string, error) {
-	eae.adjustCase(&coin)
+func (em ExchangeMarketsRepository) GetPairsForCoin(coin string) ([]string, error) {
+	em.adjustCase(&coin)
 
 	var pairs []string
 
-	if !eae.CoinExist(coin) {
+	if !em.CoinExist(coin) {
 		err := fmt.Errorf("%s is not found", coin)
 		return pairs, err
 
 	} else {
-		pairs = eae.coinToPairs[coin]
+		pairs = em.coinToPairs[coin]
 
 		if len(pairs) == 0 {
 			err := fmt.Errorf("Zero symbols for existing coin %s\n", coin)
@@ -152,9 +152,9 @@ func (eae ExchangeAssetsEnum) GetPairsForCoin(coin string) ([]string, error) {
 }
 
 // Returns true if coin exists, otherwise false
-func (eae ExchangeAssetsEnum) CoinExist(coin string) bool {
-	eae.adjustCase(&coin)
-	if _, ok := eae.coinToPairs[coin]; ok {
+func (em ExchangeMarketsRepository) CoinExist(coin string) bool {
+	em.adjustCase(&coin)
+	if _, ok := em.coinToPairs[coin]; ok {
 		return true
 	} else {
 		return false
